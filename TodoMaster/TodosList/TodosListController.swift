@@ -41,9 +41,19 @@ class TodosListController: UIViewController {
 extension TodosListController: AddTodoDelegate {
     
     func didTapAddButton() {
-        let createController = UINavigationController(rootViewController: CreateTodoController())
+        let todoController = CreateTodoController()
+        todoController.createDelegate = self
+        let createController = UINavigationController(rootViewController: todoController)
         createController.modalPresentationStyle = .fullScreen
         present(createController, animated: true, completion: nil)
+    }
+    
+}
+
+extension TodosListController: CreateTodoDelegate {
+    
+    func didTapCreateTodo(with title: String) {
+        print("New todo with title ", title)
     }
     
 }

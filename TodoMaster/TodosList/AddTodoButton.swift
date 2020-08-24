@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol AddTodoDelegate: AnyObject {
-    func didTapAddButton()
-}
-
 class AddTodoButton: UIButton {
     
     private var shadowLayer: CAShapeLayer!

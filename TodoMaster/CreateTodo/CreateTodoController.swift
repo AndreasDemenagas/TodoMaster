@@ -57,17 +57,24 @@ class CreateTodoController: UIViewController {
         return l
     }()
     
-    private let datePicker: UIDatePicker = {
-        let dp = UIDatePicker()
-        dp.datePickerMode = .date
-        return dp
-    }()
-    
     private let prioritySegmentedControl: UISegmentedControl = {
         let sc = UISegmentedControl(items: ["Small", "Medium", "High"])
         sc.selectedSegmentIndex = 0
         return sc
     }()
+    
+    private let createTodoButton: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.setTitle("Create Todo", for: .normal)
+        btn.addTarget(self, action: #selector(handleCreate), for: .touchUpInside)
+        btn.backgroundColor = .white
+        btn.setTitleColor(.black, for: .normal)
+        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        btn.layer.cornerRadius = 5
+        return btn
+    }()
+    
+    weak var createDelegate: CreateTodoDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +83,14 @@ class CreateTodoController: UIViewController {
         setupNavigationBar()
         
         setupViews()
+    }
+    
+    @objc fileprivate func handleCreate() {
+        guard titleTextField.text != "", let text = titleTextField.text else {
+            print("Empty text field...")
+            return
+        }
+        createDelegate?.didTapCreateTodo(with: text)
     }
     
     fileprivate func setupNavigationBar() {
@@ -106,6 +121,9 @@ class CreateTodoController: UIViewController {
         
         view.addSubview(prioritySegmentedControl)
         prioritySegmentedControl.anchor(top: priorityLabel.bottomAnchor, leading: titleLabel.leadingAnchor, bottom: nil, trailing: titleLabel.trailingAnchor, padding: .init(top: 8, left: 0, bottom: 0, right: 0), size: .init(width: .zero, height: 35))
+        
+        view.addSubview(createTodoButton)
+        createTodoButton.anchor(top: backgroundView.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 32, left: 40, bottom: 0, right: 40), size: .init(width: .zero, height: 50))
     }
     
     @objc fileprivate func handleBack() {
