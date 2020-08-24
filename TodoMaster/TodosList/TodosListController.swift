@@ -41,7 +41,7 @@ class TodosListController: UIViewController {
         view.addSubview(tableView)
         tableView.fillSuperView()
         tableView.register(TodoListCell.self, forCellReuseIdentifier: TodoListCell.id)
-        
+        tableView.delegate = self
         setupDataSource()
     }
     
@@ -57,7 +57,7 @@ class TodosListController: UIViewController {
     fileprivate func setupDataSource() {
         dataSource = UITableViewDiffableDataSource<Section, Todo>(tableView: tableView, cellProvider: { (tableView, indexPath, todo) -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: TodoListCell.id, for: indexPath) as! TodoListCell
-            cell.textLabel?.text = todo.title
+            cell.titleLabel.text = todo.title
             return cell
         })
     }
@@ -71,6 +71,16 @@ class TodosListController: UIViewController {
         view.addSubview(addTodoBtn)
         addTodoBtn.delegate = self
         addTodoBtn.anchor(top: nil, leading: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 50, right: 50), size: .init(width: 70, height: 70))
+    }
+    
+    
+    
+}
+
+extension TodosListController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
     }
     
 }
