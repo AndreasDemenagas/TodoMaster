@@ -90,7 +90,19 @@ class CreateTodoController: UIViewController {
             print("Empty text field...")
             return
         }
-        createDelegate?.didTapCreateTodo(with: text)
+        
+        PersistanceManager.shared.createTodo(with: text) { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .failure(let error):
+                print("Error creating todo ", error)
+            case .success(let todo):
+                self.dismiss(animated: true) {
+                    self.createDelegate?.didCreateTodo(todo: todo)
+                }
+            }
+        }
+        
     }
     
     fileprivate func setupNavigationBar() {

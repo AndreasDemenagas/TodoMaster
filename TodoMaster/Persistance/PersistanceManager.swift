@@ -27,20 +27,43 @@ final class PersistanceManager {
         return container
     }()
     
-    func saveContext() {
-        let context = persistentContainer.viewContext
+    func createTodo(with title: String, completion: @escaping (Result<Todo, Error>) -> () ) {
+        let todo = NSEntityDescription.insertNewObject(forEntityName: "Todo", into: context) as! Todo
+        todo.title = title
+        saveContext { (error) in
+            if error == nil {
+                completion(.success(todo))
+            } else if let error = error {
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func saveContext(didComplete: @escaping (Error?) -> () ) {
         if context.hasChanges {
             do {
                 try context.save()
-                print("Context SAVED")
+                didComplete(nil)
             } catch {
                 let nserror = error as NSError
+                didComplete(error)
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
     }
     
-    func fetch<T: NSManagedObject>(_ type: T.Type) -> Result<[T], Error> {
+    func fetchTodos() -> [Todo] {
+        let result = fetch(Todo.self)
+        switch result {
+        case .success(let todos):
+            return todos
+        case .failure:
+            return []
+        }
+    }
+    
+    
+    fileprivate func fetch<T: NSManagedObject>(_ type: T.Type) -> Result<[T], Error> {
         let entityName = String(describing: type)
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)

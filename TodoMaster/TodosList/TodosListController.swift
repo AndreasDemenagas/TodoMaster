@@ -32,7 +32,8 @@ class TodosListController: UIViewController {
     }
     
     fileprivate func fetchTodos() {
-        
+        todos = PersistanceManager.shared.fetchTodos()
+        createSnapshot(with: todos)
     }
     
     fileprivate func setupTableView() {
@@ -44,9 +45,19 @@ class TodosListController: UIViewController {
         setupDataSource()
     }
     
+    fileprivate func createSnapshot(with todos: [Todo]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Todo>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(todos)
+        
+        dataSource?.apply(snapshot, animatingDifferences: true)
+        print("Applied Snapshot")
+    }
+    
     fileprivate func setupDataSource() {
         dataSource = UITableViewDiffableDataSource<Section, Todo>(tableView: tableView, cellProvider: { (tableView, indexPath, todo) -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: TodoListCell.id, for: indexPath) as! TodoListCell
+            cell.textLabel?.text = todo.title
             return cell
         })
     }
@@ -78,8 +89,8 @@ extension TodosListController: AddTodoDelegate {
 
 extension TodosListController: CreateTodoDelegate {
     
-    func didTapCreateTodo(with title: String) {
-        print("New todo with title ", title)
+    func didCreateTodo(todo: Todo) {
+        print("Created new todo with title \(todo.title)")
     }
     
 }

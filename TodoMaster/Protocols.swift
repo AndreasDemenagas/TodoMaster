@@ -13,7 +13,7 @@ protocol AddTodoDelegate: AnyObject {
 }
 
 protocol CreateTodoDelegate: AnyObject {
-    func didTapCreateTodo(with title: String)
+    func didCreateTodo(todo: Todo)
 }
 
 protocol ReusableView {
