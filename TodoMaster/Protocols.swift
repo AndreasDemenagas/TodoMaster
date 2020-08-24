@@ -15,3 +15,13 @@ protocol AddTodoDelegate: AnyObject {
 protocol CreateTodoDelegate: AnyObject {
     func didTapCreateTodo(with title: String)
 }
+
+protocol ReusableView {
+    static var id: String { get }
+}
+
+extension ReusableView {
+    static var id: String {
+        return String(describing: self)
+    }
+}
