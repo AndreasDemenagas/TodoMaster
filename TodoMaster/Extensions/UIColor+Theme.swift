@@ -9,7 +9,7 @@
 import UIKit
  
 extension UIColor {
-    
+
     static let mainGreen = UIColor.rgb(r: 14, g: 190, b: 190)
     static let darkBlueBackground = UIColor.rgb(r: 9, g: 45, b: 64)
     static let lightBlueBackground = UIColor.rgb(r: 218, g: 235, b: 243)

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		F5264FFF247BBD7D00863260 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5264FFE247BBD7D00863260 /* UIViewController+Ext.swift */; };
 		F5694414247B1CFB0089E9F8 /* CreateTodoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5694413247B1CFB0089E9F8 /* CreateTodoController.swift */; };
-		F57B244A24F3C334003CBFF1 /* IndentedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57B244924F3C334003CBFF1 /* IndentedTextField.swift */; };
 		F57F620E2479C21400F0541B /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57F620D2479C21400F0541B /* PersistanceManager.swift */; };
 		F57F62112479C35900F0541B /* Todo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57F620F2479C35900F0541B /* Todo+CoreDataClass.swift */; };
 		F57F62122479C35900F0541B /* Todo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57F62102479C35900F0541B /* Todo+CoreDataProperties.swift */; };
@@ -27,7 +26,6 @@
 /* Begin PBXFileReference section */
 		F5264FFE247BBD7D00863260 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		F5694413247B1CFB0089E9F8 /* CreateTodoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTodoController.swift; sourceTree = "<group>"; };
-		F57B244924F3C334003CBFF1 /* IndentedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndentedTextField.swift; sourceTree = "<group>"; };
 		F57F620D2479C21400F0541B /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
 		F57F620F2479C35900F0541B /* Todo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Todo+CoreDataClass.swift"; path = "TodoMaster/Persistance/Todo+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		F57F62102479C35900F0541B /* Todo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Todo+CoreDataProperties.swift"; path = "TodoMaster/Persistance/Todo+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
@@ -75,7 +73,6 @@
 		F57B244824F3C321003CBFF1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F57B244924F3C334003CBFF1 /* IndentedTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -206,7 +203,6 @@
 			files = (
 				F57F62182479D42B00F0541B /* Extension_LayoutAnchors.swift in Sources */,
 				F5264FFF247BBD7D00863260 /* UIViewController+Ext.swift in Sources */,
-				F57B244A24F3C334003CBFF1 /* IndentedTextField.swift in Sources */,
 				F57F620E2479C21400F0541B /* PersistanceManager.swift in Sources */,
 				F57F621A2479D50000F0541B /* AddTodoButton.swift in Sources */,
 				F5694414247B1CFB0089E9F8 /* CreateTodoController.swift in Sources */,
