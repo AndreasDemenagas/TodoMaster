@@ -30,6 +30,7 @@ final class PersistanceManager {
     func createTodo(with title: String, completion: @escaping (Result<Todo, Error>) -> () ) {
         let todo = NSEntityDescription.insertNewObject(forEntityName: "Todo", into: context) as! Todo
         todo.title = title
+        todo.addedAt = Date()
         saveContext { (error) in
             if error == nil {
                 completion(.success(todo))
@@ -76,6 +77,18 @@ final class PersistanceManager {
         catch {
             print("Error in fetching type \(T.Type.self)", error)
             return .failure(error)
+        }
+    }
+    
+    func batchDeleteTodos(completion: @escaping (Error?) -> ()) {
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: Todo.fetchRequest())
+        
+        do {
+            try context.execute(batchDeleteRequest)
+            completion(nil)
+        }
+        catch {
+            completion(error)
         }
     }
     

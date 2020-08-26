@@ -23,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                
         UINavigationBar.appearance().standardAppearance = coloredAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
+        UINavigationBar.appearance().tintColor = .white
+        
         
         return true
     }

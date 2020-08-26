@@ -65,12 +65,26 @@ class TodosListController: UIViewController {
     fileprivate func setupNavigationBar() {
         navigationItem.title = "Today"
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "RESET", style: .plain, target: self, action: #selector(handleResetList))
     }
     
     fileprivate func setupAddTodoButton() {
         view.addSubview(addTodoBtn)
         addTodoBtn.delegate = self
         addTodoBtn.anchor(top: nil, leading: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 50, right: 50), size: .init(width: 70, height: 70))
+    }
+    
+    @objc fileprivate func handleResetList() {
+        PersistanceManager.shared.batchDeleteTodos { [weak self] (error) in
+            guard let self = self else { return }
+            if let error = error {
+                print("Failed to batch delete todos ", error)
+                return
+            }
+            
+            self.todos.removeAll()
+            self.createSnapshot(with: self.todos)
+        }
     }
     
     
