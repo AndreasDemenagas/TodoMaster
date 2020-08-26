@@ -24,6 +24,31 @@ class TodoListCell: UITableViewCell, ReusableView {
         return lbl
     }()
     
+    var todo: Todo? {
+        didSet {
+            titleLabel.text = todo?.title
+            setPriority(priority: todo?.priority)
+        }
+    }
+    
+    private func setPriority(priority: String?) {
+        guard let prior = priority else {
+            priorityLabel.text = "Undefined"
+            return
+        }
+        priorityLabel.text = prior
+        switch priority {
+        case "High":
+            priorityLabel.textColor = .systemRed
+        case "Medium":
+            priorityLabel.textColor = .systemBlue
+        case "Small":
+            priorityLabel.textColor = .systemGreen
+        default:
+            priorityLabel.textColor = .red
+        }
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         

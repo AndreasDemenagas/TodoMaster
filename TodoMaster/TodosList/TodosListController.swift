@@ -57,7 +57,7 @@ class TodosListController: UIViewController {
     fileprivate func setupDataSource() {
         dataSource = UITableViewDiffableDataSource<Section, Todo>(tableView: tableView, cellProvider: { (tableView, indexPath, todo) -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: TodoListCell.id, for: indexPath) as! TodoListCell
-            cell.titleLabel.text = todo.title
+            cell.todo = todo
             return cell
         })
     }
@@ -95,6 +95,28 @@ extension TodosListController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = deleteTodo(at: indexPath)
+        let editAction = editTodo(at: indexPath)
+        return UISwipeActionsConfiguration(actions: [editAction, deleteAction])
+    }
+    
+    func editTodo(at indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .normal, title: "Edit") { (action, view, _) in
+            print("Editing item...")
+        }
+        action.backgroundColor = .mainGreen
+        return action
+    }
+    
+    func deleteTodo(at indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .destructive, title: "Delete") { (action, view, _) in
+            print("Deleting item...")
+        }
+        action.backgroundColor = .systemRed
+        return action
     }
     
 }

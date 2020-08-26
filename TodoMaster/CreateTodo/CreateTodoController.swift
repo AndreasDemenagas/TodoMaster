@@ -91,7 +91,9 @@ class CreateTodoController: UIViewController {
             return
         }
         
-        PersistanceManager.shared.createTodo(with: text) { [weak self] (result) in
+        guard let priority = prioritySegmentedControl.titleForSegment(at: prioritySegmentedControl.selectedSegmentIndex) else { return }
+        
+        PersistanceManager.shared.createTodo(with: text, priority: priority) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .failure(let error):
