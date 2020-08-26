@@ -100,7 +100,8 @@ extension TodosListController: AddTodoDelegate {
 extension TodosListController: CreateTodoDelegate {
     
     func didCreateTodo(todo: Todo) {
-        print("Created new todo with title \(todo.title)")
+        self.todos.append(todo)
+        createSnapshot(with: self.todos)
     }
     
 }
