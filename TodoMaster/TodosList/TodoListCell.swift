@@ -24,6 +24,14 @@ class TodoListCell: UITableViewCell, ReusableView {
         return lbl
     }()
     
+    private let addedAtLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.textColor = .lightGray
+        lbl.text = "Added: Jul 13, 2020"
+        lbl.font = UIFontMetrics.default.scaledFont(for: .systemFont(ofSize: 15))
+        return lbl
+    }()
+    
     var todo: Todo? {
         didSet {
             titleLabel.text = todo?.title
@@ -52,11 +60,14 @@ class TodoListCell: UITableViewCell, ReusableView {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        addSubview(addedAtLabel)
+        addedAtLabel.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 12, left: 16, bottom: 0, right: 0))
+        
         addSubview(titleLabel)
-        titleLabel.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 12, left: 16, bottom: 0, right: 0))
+        titleLabel.anchor(top: addedAtLabel.bottomAnchor, leading: addedAtLabel.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 8, left: 0, bottom: 0, right: 0))
         
         addSubview(priorityLabel)
-        priorityLabel.anchor(top: titleLabel.bottomAnchor, leading: titleLabel.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 4, left: 0, bottom: 0, right: 0))
+        priorityLabel.anchor(top: titleLabel.bottomAnchor, leading: addedAtLabel.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 4, left: 0, bottom: 0, right: 0))
     }
     
     required init?(coder: NSCoder) {
