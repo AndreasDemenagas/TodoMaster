@@ -32,6 +32,12 @@ class TodoListCell: UITableViewCell, ReusableView {
         return lbl
     }()
     
+    private let separator: UIView = {
+        let v = UIView()
+        v.backgroundColor = .lightGray
+        return v
+    }()
+    
     var todo: Todo? {
         didSet {
             titleLabel.text = todo?.title
@@ -79,6 +85,9 @@ class TodoListCell: UITableViewCell, ReusableView {
         
         addSubview(priorityLabel)
         priorityLabel.anchor(top: titleLabel.bottomAnchor, leading: addedAtLabel.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 4, left: 0, bottom: 0, right: 0))
+        
+        addSubview(separator)
+        separator.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, size: .init(width: .zero, height: 1))
     }
     
     required init?(coder: NSCoder) {
