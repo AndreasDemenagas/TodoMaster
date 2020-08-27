@@ -14,6 +14,7 @@ protocol AddTodoDelegate: AnyObject {
 
 protocol CreateTodoDelegate: AnyObject {
     func didCreateTodo(todo: Todo)
+    func didEditTodo(todo: Todo)
 }
 
 protocol ReusableView {
