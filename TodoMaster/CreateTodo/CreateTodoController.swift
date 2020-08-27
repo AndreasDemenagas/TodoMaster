@@ -74,13 +74,6 @@ class CreateTodoController: UIViewController {
         return btn
     }()
     
-    var todo: Todo? {
-        didSet {
-            titleTextField.text = todo?.title
-            createTodoButton.setTitle("Save Todo", for: .normal)
-        }
-    }
-    
     weak var createDelegate: CreateTodoDelegate?
     
     override func viewDidLoad() {
@@ -92,36 +85,8 @@ class CreateTodoController: UIViewController {
         setupViews()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationItem.title = todo == nil ? "New" : "Edit"
-    }
-    
     @objc fileprivate func handleButtonPressed() {
-        if todo == nil {
-            print("Creating new todo")
-            handleCreate()
-        } else {
-            print("editing todo")
-            handleSaveEditedTodo()
-        }
-    }
-    
-    fileprivate func handleSaveEditedTodo() {
-        guard let todo = self.todo else { return }
-        guard titleTextField.text != "", let text = titleTextField.text else { return }
-        guard let priority = prioritySegmentedControl.titleForSegment(at: prioritySegmentedControl.selectedSegmentIndex) else { return }
-        
-        PersistanceManager.shared.editTodoItem(todo: todo, title: text, priority: priority) { (result) in
-            switch result {
-            case .failure(let error):
-                print("Error editing todo item ", error)
-            case .success(let todo):
-                self.dismiss(animated: true) {
-                    self.createDelegate?.didEditTodo(todo: todo)
-                }
-            }
-        }
+        handleCreate()
     }
     
     fileprivate func handleCreate() {
@@ -129,10 +94,9 @@ class CreateTodoController: UIViewController {
             print("Empty text field...")
             return
         }
+        guard let priority = prioritySegmentedControl.titleForSegment(at: prioritySegmentedControl.selectedSegmentIndex), let locationText = locationTextField.text else { return }
         
-        guard let priority = prioritySegmentedControl.titleForSegment(at: prioritySegmentedControl.selectedSegmentIndex) else { return }
-        
-        PersistanceManager.shared.createTodo(with: text, priority: priority) { [weak self] (result) in
+        PersistanceManager.shared.createTodo(with: text, location: locationText, priority: priority) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .failure(let error):
@@ -143,10 +107,10 @@ class CreateTodoController: UIViewController {
                 }
             }
         }
-        
     }
     
     fileprivate func setupNavigationBar() {
+        title = "New"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(handleBack))
         navigationItem.leftBarButtonItem?.tintColor = .white

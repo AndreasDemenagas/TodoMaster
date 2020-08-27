@@ -99,13 +99,7 @@ extension TodosListController: UITableViewDelegate {
     
     func editTodo(at indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .normal, title: "Edit") { (action, view, _) in
-            if let todoToEdit = self.dataSource?.itemIdentifier(for: indexPath) {
-                let editController = CreateTodoController()
-                editController.createDelegate = self
-                editController.todo = todoToEdit
-                let navController = UINavigationController(rootViewController: editController)
-                self.present(navController, animated: true, completion: nil)
-            }
+           
         }
         action.backgroundColor = .mainGreen
         return action
