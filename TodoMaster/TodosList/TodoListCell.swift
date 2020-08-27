@@ -36,6 +36,7 @@ class TodoListCell: UITableViewCell, ReusableView {
         didSet {
             titleLabel.text = todo?.title
             setPriority(priority: todo?.priority)
+            addedAtLabel.text = "Added: " + formatAddedDate(date: todo?.addedAt)
         }
     }
     
@@ -55,6 +56,16 @@ class TodoListCell: UITableViewCell, ReusableView {
         default:
             priorityLabel.textColor = .red
         }
+    }
+    
+    private func formatAddedDate(date: Date?) -> String {
+        guard let date = date else {
+            return "nil"
+        }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d, yyyy"
+        let dateString = formatter.string(from: date)
+        return dateString
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

@@ -107,7 +107,16 @@ extension TodosListController: UITableViewDelegate {
     
     func deleteTodo(at indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .destructive, title: "Delete") { (action, view, _) in
-            print("Deleting item...")
+            if let todoToDelete = self.dataSource?.itemIdentifier(for: indexPath) {
+                PersistanceManager.shared.removeTodo(todo: todoToDelete) { (error) in
+                    if let error = error {
+                        print("Failed to delete todo...", error)
+                        return
+                    }
+                    self.todos.remove(at: indexPath.row)
+                    self.createSnapshot(with: self.todos)
+                }
+            }
         }
         action.backgroundColor = .systemRed
         return action

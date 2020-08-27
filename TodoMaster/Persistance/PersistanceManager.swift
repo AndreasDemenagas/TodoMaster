@@ -41,6 +41,17 @@ final class PersistanceManager {
         }
     }
     
+    func removeTodo(todo: Todo, completion: @escaping (Error?) -> () ) {
+        self.context.delete(todo)
+        saveContext { (error) in
+            if error == nil {
+                completion(nil)
+                return
+            }
+            completion(error)
+        }
+    }
+    
     func saveContext(didComplete: @escaping (Error?) -> () ) {
         if context.hasChanges {
             do {
