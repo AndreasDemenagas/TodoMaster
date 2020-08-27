@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F50755FF24F3C94100409F5A /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50755FE24F3C94100409F5A /* Protocols.swift */; };
+		F50755FF24F3C94100409F5A /* TodoProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50755FE24F3C94100409F5A /* TodoProtocols.swift */; };
 		F5079AB324F3E9FA0094B8E3 /* TodoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5079AB224F3E9FA0094B8E3 /* TodoListCell.swift */; };
-		F5264FFF247BBD7D00863260 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5264FFE247BBD7D00863260 /* UIViewController+Ext.swift */; };
 		F557679024F7AEFE0036D2AF /* TodoListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F557678F24F7AEFE0036D2AF /* TodoListDataSource.swift */; };
 		F5694414247B1CFB0089E9F8 /* CreateTodoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5694413247B1CFB0089E9F8 /* CreateTodoController.swift */; };
 		F57F620E2479C21400F0541B /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57F620D2479C21400F0541B /* PersistanceManager.swift */; };
 		F57F62182479D42B00F0541B /* Extension_LayoutAnchors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57F62172479D42B00F0541B /* Extension_LayoutAnchors.swift */; };
 		F57F621A2479D50000F0541B /* AddTodoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57F62192479D50000F0541B /* AddTodoButton.swift */; };
 		F59A382624A62888002FFA8B /* UIColor+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A382524A62888002FFA8B /* UIColor+Theme.swift */; };
+		F5A5693224F854C4007C80C8 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A5693124F854C4007C80C8 /* ReusableView.swift */; };
 		F5C7021A247804D70027BD18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C70219247804D70027BD18 /* AppDelegate.swift */; };
 		F5C7021C247804D70027BD18 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C7021B247804D70027BD18 /* SceneDelegate.swift */; };
 		F5C7021E247804D70027BD18 /* TodosListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C7021D247804D70027BD18 /* TodosListController.swift */; };
@@ -25,15 +25,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F50755FE24F3C94100409F5A /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		F50755FE24F3C94100409F5A /* TodoProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoProtocols.swift; sourceTree = "<group>"; };
 		F5079AB224F3E9FA0094B8E3 /* TodoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListCell.swift; sourceTree = "<group>"; };
-		F5264FFE247BBD7D00863260 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		F557678F24F7AEFE0036D2AF /* TodoListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListDataSource.swift; sourceTree = "<group>"; };
 		F5694413247B1CFB0089E9F8 /* CreateTodoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTodoController.swift; sourceTree = "<group>"; };
 		F57F620D2479C21400F0541B /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
 		F57F62172479D42B00F0541B /* Extension_LayoutAnchors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension_LayoutAnchors.swift; sourceTree = "<group>"; };
 		F57F62192479D50000F0541B /* AddTodoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoButton.swift; sourceTree = "<group>"; };
 		F59A382524A62888002FFA8B /* UIColor+Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Theme.swift"; sourceTree = "<group>"; };
+		F5A5693124F854C4007C80C8 /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		F5C70216247804D70027BD18 /* TodoMaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoMaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5C70219247804D70027BD18 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F5C7021B247804D70027BD18 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,7 +67,6 @@
 			isa = PBXGroup;
 			children = (
 				F5C7021D247804D70027BD18 /* TodosListController.swift */,
-				F57F62192479D50000F0541B /* AddTodoButton.swift */,
 				F5079AB224F3E9FA0094B8E3 /* TodoListCell.swift */,
 				F557678F24F7AEFE0036D2AF /* TodoListDataSource.swift */,
 			);
@@ -86,10 +85,26 @@
 			isa = PBXGroup;
 			children = (
 				F57F62172479D42B00F0541B /* Extension_LayoutAnchors.swift */,
-				F5264FFE247BBD7D00863260 /* UIViewController+Ext.swift */,
 				F59A382524A62888002FFA8B /* UIColor+Theme.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F5A5692F24F85488007C80C8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F57F62192479D50000F0541B /* AddTodoButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F5A5693024F854B3007C80C8 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				F50755FE24F3C94100409F5A /* TodoProtocols.swift */,
+				F5A5693124F854C4007C80C8 /* ReusableView.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		F5C7020D247804D70027BD18 = {
@@ -115,9 +130,10 @@
 				F5C7021B247804D70027BD18 /* SceneDelegate.swift */,
 				F5264FF9247BB94D00863260 /* TodosList */,
 				F5264FF8247BB93100863260 /* CreateTodo */,
+				F5A5692F24F85488007C80C8 /* Views */,
 				F57F62132479D3D700F0541B /* Persistance */,
+				F5A5693024F854B3007C80C8 /* Protocols */,
 				F57F62162479D41500F0541B /* Extensions */,
-				F50755FE24F3C94100409F5A /* Protocols.swift */,
 				F5C70225247804D90027BD18 /* Assets.xcassets */,
 				F5C70227247804D90027BD18 /* LaunchScreen.storyboard */,
 				F5C7022A247804D90027BD18 /* Info.plist */,
@@ -197,14 +213,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F57F62182479D42B00F0541B /* Extension_LayoutAnchors.swift in Sources */,
-				F5264FFF247BBD7D00863260 /* UIViewController+Ext.swift in Sources */,
 				F57F620E2479C21400F0541B /* PersistanceManager.swift in Sources */,
 				F57F621A2479D50000F0541B /* AddTodoButton.swift in Sources */,
 				F5694414247B1CFB0089E9F8 /* CreateTodoController.swift in Sources */,
 				F5C7021E247804D70027BD18 /* TodosListController.swift in Sources */,
 				F5C70224247804D70027BD18 /* TodoMaster.xcdatamodeld in Sources */,
 				F5C7021A247804D70027BD18 /* AppDelegate.swift in Sources */,
-				F50755FF24F3C94100409F5A /* Protocols.swift in Sources */,
+				F5A5693224F854C4007C80C8 /* ReusableView.swift in Sources */,
+				F50755FF24F3C94100409F5A /* TodoProtocols.swift in Sources */,
 				F59A382624A62888002FFA8B /* UIColor+Theme.swift in Sources */,
 				F5079AB324F3E9FA0094B8E3 /* TodoListCell.swift in Sources */,
 				F5C7021C247804D70027BD18 /* SceneDelegate.swift in Sources */,
