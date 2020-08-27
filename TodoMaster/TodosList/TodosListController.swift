@@ -12,12 +12,8 @@ class TodosListController: UIViewController {
     
     let addTodoBtn = AddTodoButton(type: .system)
     
-    enum Section {
-        case main
-    }
-    
     var tableView: UITableView!
-    var dataSource: UITableViewDiffableDataSource<Section, Todo>?
+    var dataSource: TodoListDataSource?
     
     var todos = [Todo]()
 
@@ -55,7 +51,7 @@ class TodosListController: UIViewController {
     }
     
     fileprivate func setupDataSource() {
-        dataSource = UITableViewDiffableDataSource<Section, Todo>(tableView: tableView, cellProvider: { (tableView, indexPath, todo) -> UITableViewCell? in
+        dataSource = TodoListDataSource(tableView: tableView, cellProvider: { (tableView, indexPath, todo) -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: TodoListCell.id, for: indexPath) as! TodoListCell
             cell.todo = todo
             return cell
@@ -86,8 +82,6 @@ class TodosListController: UIViewController {
             self.createSnapshot(with: self.todos)
         }
     }
-    
-    
     
 }
 
