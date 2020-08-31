@@ -23,26 +23,9 @@ class CreateTodoController: UIViewController {
         return l
     }()
     
-    private let locationLabel: UILabel = {
-        let l = UILabel()
-        l.text = "Location"
-        l.font = UIFont.boldSystemFont(ofSize: 18)
-        return l
-    }()
-    
     private let titleTextField: UITextField = {
         let tf = UITextField()
         tf.placeholder = "Enter Title"
-        tf.layer.borderColor = UIColor.lightGray.cgColor
-        tf.borderStyle = .roundedRect
-        tf.layer.borderWidth = 1
-        tf.layer.cornerRadius = 5
-        return tf
-    }()
-    
-    private let locationTextField: UITextField = {
-        let tf = UITextField()
-        tf.placeholder = "Enter Location"
         tf.layer.borderColor = UIColor.lightGray.cgColor
         tf.borderStyle = .roundedRect
         tf.layer.borderWidth = 1
@@ -94,9 +77,9 @@ class CreateTodoController: UIViewController {
             print("Empty text field...")
             return
         }
-        guard let priority = prioritySegmentedControl.titleForSegment(at: prioritySegmentedControl.selectedSegmentIndex), let locationText = locationTextField.text else { return }
+        guard let priority = prioritySegmentedControl.titleForSegment(at: prioritySegmentedControl.selectedSegmentIndex) else { return }
         
-        PersistanceManager.shared.createTodo(with: text, location: locationText, priority: priority) { [weak self] (result) in
+        PersistanceManager.shared.createTodo(with: text, priority: priority) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .failure(let error):
@@ -118,7 +101,7 @@ class CreateTodoController: UIViewController {
     
     fileprivate func setupViews() {
         view.addSubview(backgroundView)
-        backgroundView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, size: .init(width: .zero, height: 300))
+        backgroundView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, size: .init(width: .zero, height: 210))
         
         view.addSubview(titleLabel)
         titleLabel.anchor(top: backgroundView.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 20, left: 16, bottom: 0, right: 16), size: .init(width: .zero, height: 30))
@@ -126,14 +109,8 @@ class CreateTodoController: UIViewController {
         view.addSubview(titleTextField)
         titleTextField.anchor(top: titleLabel.bottomAnchor, leading: titleLabel.leadingAnchor, bottom: nil, trailing: titleLabel.trailingAnchor, padding: .init(top: 8, left: 0, bottom: 0, right: 0), size: .init(width: .zero, height: 35))
         
-        view.addSubview(locationLabel)
-        locationLabel.anchor(top: titleTextField.bottomAnchor, leading: titleLabel.leadingAnchor, bottom: nil, trailing: titleLabel.trailingAnchor, padding: .init(top: 20, left: 0, bottom: 0, right: 0), size: .init(width: .zero, height: 30))
-        
-        view.addSubview(locationTextField)
-        locationTextField.anchor(top: locationLabel.bottomAnchor, leading: titleLabel.leadingAnchor, bottom: nil, trailing: titleLabel.trailingAnchor, padding: .init(top: 8, left: 0, bottom: 0, right: 0), size: .init(width: .zero, height: 35))
-        
         view.addSubview(priorityLabel)
-        priorityLabel.anchor(top: locationTextField.bottomAnchor, leading: titleLabel.leadingAnchor, bottom: nil, trailing: titleLabel.trailingAnchor, padding: .init(top: 20, left: 0, bottom: 0, right: 0), size: .init(width: .zero, height: 30))
+        priorityLabel.anchor(top: titleTextField.bottomAnchor, leading: titleLabel.leadingAnchor, bottom: nil, trailing: titleLabel.trailingAnchor, padding: .init(top: 20, left: 0, bottom: 0, right: 0), size: .init(width: .zero, height: 30))
         
         view.addSubview(prioritySegmentedControl)
         prioritySegmentedControl.anchor(top: priorityLabel.bottomAnchor, leading: titleLabel.leadingAnchor, bottom: nil, trailing: titleLabel.trailingAnchor, padding: .init(top: 8, left: 0, bottom: 0, right: 0), size: .init(width: .zero, height: 35))

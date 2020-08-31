@@ -27,11 +27,10 @@ final class PersistanceManager {
         return container
     }()
     
-    func createTodo(with title: String, location: String, priority: String, completion: @escaping (Result<Todo, Error>) -> () ) {
+    func createTodo(with title: String, priority: String, completion: @escaping (Result<Todo, Error>) -> () ) {
         let todo = NSEntityDescription.insertNewObject(forEntityName: "Todo", into: context) as! Todo
         todo.title = title
         todo.priority = priority
-        todo.location = location
         todo.addedAt = Date()
         saveContext { (error) in
             if error == nil {
