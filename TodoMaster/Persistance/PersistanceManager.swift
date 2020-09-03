@@ -65,11 +65,12 @@ final class PersistanceManager {
         }
     }
     
+    #warning("Remove force unwrap...")
     func fetchTodos() -> [Todo] {
         let result = fetch(Todo.self)
         switch result {
         case .success(let todos):
-            return todos
+            return todos.sorted(by: { $0.addedAt! > $1.addedAt! })
         case .failure:
             return []
         }
