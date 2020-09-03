@@ -12,7 +12,7 @@ class CreateTodoController: UIViewController {
     
     weak var createDelegate: CreateTodoDelegate?
     
-    lazy var createTodoView = CreateTodoView(todoFunction: self.handleCreate)
+    lazy var createTodoView = CreateTodoView(didFinishMakingTodo: self.handleCreate)
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -59,8 +59,8 @@ class CreateTodoView: UIView {
     
     var didCreateTodo: ((String, String) -> Void)
     
-    init(todoFunction: @escaping ((String, String) -> Void) ) {
-        self.didCreateTodo = todoFunction
+    init(didFinishMakingTodo: @escaping ((String, String) -> Void) ) {
+        self.didCreateTodo = didFinishMakingTodo
     
         super.init(frame: .zero)
         
