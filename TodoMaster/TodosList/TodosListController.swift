@@ -40,7 +40,9 @@ class TodosListController: UIViewController {
     }
     
     fileprivate func fetchTodos() {
-        todos = PersistanceManager.shared.fetchTodos()
+        todos = PersistanceManager.shared.fetchTodos().sorted(by: { (t1, t2) -> Bool in
+            return t1.addedAt! > t2.addedAt!
+        })
         createSnapshot(with: todos)
     }
     
@@ -167,7 +169,7 @@ extension TodosListController: AddTodoDelegate {
 extension TodosListController: CreateTodoDelegate {
     
     func didCreateTodo(todo: Todo) {
-        self.todos.append(todo)
+        self.todos.insert(todo, at: 0)
         createSnapshot(with: self.todos)
     }
     
