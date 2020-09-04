@@ -182,7 +182,7 @@ extension TodosListController: CreateTodoDelegate {
     }
     
     func didEditTodo(todo: Todo) {
-      
+        tableView.reloadData()
     }
     
 }

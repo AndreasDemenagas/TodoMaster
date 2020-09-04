@@ -12,7 +12,7 @@ class CreateTodoController: UIViewController {
     
     weak var createDelegate: CreateTodoDelegate?
     
-    lazy var createTodoView = CreateTodoView(didFinishMakingTodo: self.handleCreate)
+    lazy var createTodoView = CreateTodoView(didFinishMakingTodo: self.handleCreate, didFinishEditingTodo: self.handleEdit)
     
     var todo: Todo? {
         didSet {
@@ -45,6 +45,20 @@ class CreateTodoController: UIViewController {
             case .success(let todo):
                 self.dismiss(animated: true) {
                     self.createDelegate?.didCreateTodo(todo: todo)
+                }
+            }
+        }
+    }
+    
+    fileprivate func handleEdit(text: String, priority: String) {
+        guard let todo = self.todo else { return }
+        PersistanceManager.shared.editTodo(todo: todo, with: text, priority: priority) { (result) in
+            switch result {
+            case .failure(let error):
+                print("Error editing todo - ", error)
+            case .success(let todo):
+                self.dismiss(animated: true) {
+                    self.createDelegate?.didEditTodo(todo: todo)
                 }
             }
         }

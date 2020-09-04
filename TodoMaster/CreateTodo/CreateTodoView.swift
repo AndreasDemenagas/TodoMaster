@@ -64,11 +64,12 @@ class CreateTodoView: UIView {
         }
     }
     
-    var didCreateTodo: ((String, String) -> Void)
+    var didCreateTodo: ((String, String) -> ())
+    var didEditTodo: ((String, String) -> ())
     
-    init(didFinishMakingTodo: @escaping ((String, String) -> Void) ) {
+    init(didFinishMakingTodo: @escaping ((String, String) -> ()), didFinishEditingTodo: @escaping ((String, String) -> ()) ) {
         self.didCreateTodo = didFinishMakingTodo
-    
+        self.didEditTodo = didFinishEditingTodo
         super.init(frame: .zero)
         
         setupViews()
@@ -120,16 +121,15 @@ class CreateTodoView: UIView {
             createNewTodo(with: text, and: priority)
             return
         }
-        saveEditedTodo()
+        saveEditedTodo(with: text, and: priority)
     }
     
     func createNewTodo(with text: String, and priority: String) {
-        print("New Todo")
         didCreateTodo(text, priority)
     }
     
-    func saveEditedTodo() {
-        print("Editing todo...")
+    func saveEditedTodo(with text: String, and priority: String) {
+        didEditTodo(text, priority)
     }
     
 }

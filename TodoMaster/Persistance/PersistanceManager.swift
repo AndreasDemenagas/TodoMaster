@@ -41,6 +41,18 @@ final class PersistanceManager {
         }
     }
     
+    func editTodo(todo: Todo, with title: String, priority: String, completion: @escaping (Result<Todo, Error>) -> () ) {
+        todo.title = title
+        todo.priority = priority
+        saveContext { (error) in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            completion(.success(todo))
+        }
+    }
+    
     func removeTodo(todo: Todo, completion: @escaping (Error?) -> () ) {
         self.context.delete(todo)
         saveContext { (error) in
@@ -53,15 +65,13 @@ final class PersistanceManager {
     }
     
     func saveContext(didComplete: @escaping (Error?) -> () ) {
-        if context.hasChanges {
-            do {
-                try context.save()
-                didComplete(nil)
-            } catch {
-                let nserror = error as NSError
-                didComplete(error)
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
+        do {
+            try context.save()
+            didComplete(nil)
+        } catch {
+            let nserror = error as NSError
+            didComplete(error)
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
 
