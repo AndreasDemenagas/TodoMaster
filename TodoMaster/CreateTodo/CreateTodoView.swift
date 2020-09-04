@@ -13,6 +13,7 @@ class CreateTodoView: UIView {
     private let backgroundView: UIView = {
         let v = UIView()
         v.backgroundColor = .lightBlueBackground
+        v.translatesAutoresizingMaskIntoConstraints = false
         return v
     }()
     
@@ -71,8 +72,18 @@ class CreateTodoView: UIView {
         self.didCreateTodo = didFinishMakingTodo
         self.didEditTodo = didFinishEditingTodo
         super.init(frame: .zero)
-        
-        setupViews()
+    }
+    
+    override func layoutSubviews() {
+        setupViewsForDevice()
+    }
+    
+    fileprivate func setupViewsForDevice() {
+        if traitCollection.horizontalSizeClass.rawValue == 1 {
+            setupViewsForSmallWidth()
+        } else {
+            setupViewsForNormalWidth()
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -92,7 +103,33 @@ class CreateTodoView: UIView {
         }
     }
     
-    fileprivate func setupViews() {
+    fileprivate func setupViewsForNormalWidth() {
+        addSubview(backgroundView)
+        let height: CGFloat = 20 + 30 + 8 + 35 + 20 + 30 + 8 + 35 + 20
+        NSLayoutConstraint.activate([
+            backgroundView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            backgroundView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            backgroundView.widthAnchor.constraint(equalToConstant: frame.width * 0.65),
+            backgroundView.heightAnchor.constraint(equalToConstant: height)
+        ])
+        
+        addSubview(titleLabel)
+        titleLabel.anchor(top: backgroundView.topAnchor, leading: backgroundView.leadingAnchor, bottom: nil, trailing: backgroundView.trailingAnchor, padding: .init(top: 20, left: 16, bottom: 0, right: 16), size: .init(width: .zero, height: 30))
+        
+        addSubview(titleTextField)
+        titleTextField.anchor(top: titleLabel.bottomAnchor, leading: titleLabel.leadingAnchor, bottom: nil, trailing: titleLabel.trailingAnchor, padding: .init(top: 8, left: 0, bottom: 0, right: 0), size: .init(width: .zero, height: 35))
+        
+        addSubview(priorityLabel)
+        priorityLabel.anchor(top: titleTextField.bottomAnchor, leading: titleLabel.leadingAnchor, bottom: nil, trailing: titleLabel.trailingAnchor, padding: .init(top: 20, left: 0, bottom: 0, right: 0), size: .init(width: .zero, height: 30))
+        
+        addSubview(prioritySegmentedControl)
+        prioritySegmentedControl.anchor(top: priorityLabel.bottomAnchor, leading: titleLabel.leadingAnchor, bottom: nil, trailing: titleLabel.trailingAnchor, padding: .init(top: 8, left: 0, bottom: 0, right: 0), size: .init(width: .zero, height: 35))
+        
+        addSubview(createTodoButton)
+        createTodoButton.anchor(top: backgroundView.bottomAnchor, leading: backgroundView.leadingAnchor, bottom: nil, trailing: backgroundView.trailingAnchor, padding: .init(top: 32, left: 0, bottom: 0, right: 0), size: .init(width: .zero, height: 50))
+    }
+    
+    fileprivate func setupViewsForSmallWidth() {
         addSubview(backgroundView)
         backgroundView.anchor(top: safeAreaLayoutGuide.topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, size: .init(width: .zero, height: 210))
         
