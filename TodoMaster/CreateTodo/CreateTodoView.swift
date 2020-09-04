@@ -57,6 +57,13 @@ class CreateTodoView: UIView {
         return btn
     }()
     
+    var todo: Todo? {
+        didSet {
+            guard let todo = todo else { return }
+            configureView(with: todo)
+        }
+    }
+    
     var didCreateTodo: ((String, String) -> Void)
     
     init(didFinishMakingTodo: @escaping ((String, String) -> Void) ) {
@@ -71,6 +78,9 @@ class CreateTodoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    fileprivate func configureView(with todo: Todo) {
+        
+    }
     
     fileprivate func setupViews() {
         addSubview(backgroundView)

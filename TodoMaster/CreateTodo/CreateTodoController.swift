@@ -14,11 +14,22 @@ class CreateTodoController: UIViewController {
     
     lazy var createTodoView = CreateTodoView(didFinishMakingTodo: self.handleCreate)
     
+    var todo: Todo? {
+        didSet {
+            self.createTodoView.todo = todo
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .darkBlueBackground
         setupNavigationBar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        title = todo == nil ? "New" : "Edit"
     }
     
     override func loadView() {
@@ -40,7 +51,6 @@ class CreateTodoController: UIViewController {
     }
     
     fileprivate func setupNavigationBar() {
-        title = "New"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(handleBack))
         navigationItem.leftBarButtonItem?.tintColor = .white

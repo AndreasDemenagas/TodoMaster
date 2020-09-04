@@ -127,10 +127,20 @@ extension TodosListController: UITableViewDelegate {
     
     func editTodo(at indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .normal, title: "Edit") { (action, view, _) in
-           
+            guard let todo = self.dataSource?.itemIdentifier(for: indexPath) else { return }
+            self.presentEditingController(for: todo)
         }
         action.backgroundColor = .mainGreen
         return action
+    }
+    
+    func presentEditingController(for todo: Todo) {
+        let todoController = CreateTodoController()
+        todoController.createDelegate = self
+        todoController.todo = todo
+        let createController = UINavigationController(rootViewController: todoController)
+        createController.modalPresentationStyle = .fullScreen
+        present(createController, animated: true, completion: nil)
     }
     
     func deleteTodo(at indexPath: IndexPath) -> UIContextualAction {
