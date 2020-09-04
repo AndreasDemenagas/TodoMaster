@@ -79,7 +79,16 @@ class CreateTodoView: UIView {
     }
     
     fileprivate func configureView(with todo: Todo) {
-        
+        titleTextField.text = todo.title
+        createTodoButton.setTitle("Save Todo", for: .normal)
+        switch todo.priority {
+        case "Small":
+            prioritySegmentedControl.selectedSegmentIndex = 0
+        case "Medium":
+            prioritySegmentedControl.selectedSegmentIndex = 1
+        default:
+            prioritySegmentedControl.selectedSegmentIndex = 2
+        }
     }
     
     fileprivate func setupViews() {
@@ -104,12 +113,23 @@ class CreateTodoView: UIView {
     
     @objc func handleButtonPressed() {
         guard titleTextField.text != "", let text = titleTextField.text else {
-            print("Empty text field...")
             return
         }
         guard let priority = prioritySegmentedControl.titleForSegment(at: prioritySegmentedControl.selectedSegmentIndex) else { return }
-        
+        if todo == nil {
+            createNewTodo(with: text, and: priority)
+            return
+        }
+        saveEditedTodo()
+    }
+    
+    func createNewTodo(with text: String, and priority: String) {
+        print("New Todo")
         didCreateTodo(text, priority)
+    }
+    
+    func saveEditedTodo() {
+        print("Editing todo...")
     }
     
 }
