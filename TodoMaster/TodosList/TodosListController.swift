@@ -61,6 +61,7 @@ class TodosListController: UIViewController {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Todo>()
         snapshot.appendSections([.main])
         snapshot.appendItems(todos)
+        
         dataSource?.apply(snapshot, animatingDifferences: true)
         print("Applied Snapshot")
     }
@@ -108,7 +109,7 @@ extension TodosListController: UITableViewDelegate {
     
     func completeTodo(at indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .normal, title: "Done") { (action, view, _) in
-           print("Completing Todo item")
+            guard let todo = self.dataSource?.itemIdentifier(for: indexPath) else { return }
         }
         action.backgroundColor = .systemBlue
         return action
