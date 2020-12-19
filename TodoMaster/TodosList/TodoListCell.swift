@@ -43,7 +43,21 @@ class TodoListCell: UITableViewCell, ReusableView {
             titleLabel.text = todo?.title
             setPriority(priority: todo?.priority)
             addedAtLabel.text = "Added: " + formatAddedDate(date: todo?.addedAt)
+            
+            if todo!.completed {
+                completedTodo()
+            } else {
+                print("\(todo!.title!) is NOT completed....")
+            }
         }
+    }
+    
+    private func completedTodo() {
+        accessoryType = .checkmark
+        titleLabel.textColor = .lightGray
+        titleLabel.alpha = 0.5
+        priorityLabel.alpha = 0.5
+        addedAtLabel.alpha = 0.5
     }
     
     private func setPriority(priority: String?) {

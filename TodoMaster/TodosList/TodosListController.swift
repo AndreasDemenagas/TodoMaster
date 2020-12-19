@@ -63,7 +63,6 @@ class TodosListController: UIViewController {
         snapshot.appendItems(todos)
         
         dataSource?.apply(snapshot, animatingDifferences: true)
-        print("Applied Snapshot")
     }
     
     fileprivate func setupDataSource() {
@@ -108,10 +107,17 @@ extension TodosListController: UITableViewDelegate {
     }
     
     func completeTodo(at indexPath: IndexPath) -> UIContextualAction {
-        let action = UIContextualAction(style: .normal, title: "Done") { (action, view, _) in
-            guard let todo = self.dataSource?.itemIdentifier(for: indexPath) else { return }
+        guard let todo = self.dataSource?.itemIdentifier(for: indexPath) else {
+           fatalError("Todo should be present here...")
         }
-        action.backgroundColor = .systemBlue
+        let title = !todo.completed ? "Done" : "Undone"
+        let action = UIContextualAction(style: .normal, title: title) { (action, view, _) in
+            print("\(todo.title!) completed....")
+            PersistanceManager.shared.markCompleted(todo: todo) { (result) in
+                self.tableView.reloadData()
+            }
+        }
+        action.backgroundColor = !todo.completed ? .systemBlue : .systemGreen
         return action
     }
     

@@ -32,12 +32,24 @@ final class PersistanceManager {
         todo.title = title
         todo.priority = priority
         todo.addedAt = Date()
+        todo.completed = false
         saveContext { (error) in
             if error == nil {
                 completion(.success(todo))
             } else if let error = error {
                 completion(.failure(error))
             }
+        }
+    }
+    
+    func markCompleted(todo: Todo, completion: @escaping (Result<Todo, Error>) -> () ) {
+        todo.completed = true
+        saveContext { (error) in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            completion(.success(todo))
         }
     }
     
