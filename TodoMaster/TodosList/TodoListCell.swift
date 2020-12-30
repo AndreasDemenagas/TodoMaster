@@ -47,7 +47,7 @@ class TodoListCell: UITableViewCell, ReusableView {
             if todo!.completed {
                 completedTodo()
             } else {
-                print("Todo with title \"\(todo!.title!)\" is NOT completed....")
+                print("Todo with title \"\(todo!.title!)\" has not been completed....")
             }
         }
     }
