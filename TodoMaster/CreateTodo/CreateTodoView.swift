@@ -20,15 +20,17 @@ class CreateTodoView: UIView {
     private let titleLabel: UILabel = {
         let l = UILabel()
         l.text = "Title"
+        l.textColor = .black
         l.font = UIFont.boldSystemFont(ofSize: 18)
         return l
     }()
     
     private let titleTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Enter Title"
         tf.layer.borderColor = UIColor.lightGray.cgColor
         tf.borderStyle = .roundedRect
+        tf.backgroundColor = .white
+        tf.attributedPlaceholder = NSAttributedString(string: "Enter Title", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         tf.layer.borderWidth = 1
         tf.layer.cornerRadius = 5
         return tf
@@ -37,6 +39,7 @@ class CreateTodoView: UIView {
     private let priorityLabel: UILabel = {
         let l = UILabel()
         l.text = "Set Priority"
+        l.textColor = .black
         l.font = UIFont.boldSystemFont(ofSize: 18)
         return l
     }()
@@ -44,6 +47,9 @@ class CreateTodoView: UIView {
     private let prioritySegmentedControl: UISegmentedControl = {
         let sc = UISegmentedControl(items: ["Small", "Medium", "High"])
         sc.selectedSegmentIndex = 0
+        sc.selectedSegmentTintColor = .white
+        sc.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .selected)
+        sc.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
         return sc
     }()
     
@@ -51,8 +57,8 @@ class CreateTodoView: UIView {
         let btn = UIButton(type: .system)
         btn.setTitle("Create Todo", for: .normal)
         btn.addTarget(self, action: #selector(handleButtonPressed), for: .touchUpInside)
-        btn.backgroundColor = .white
-        btn.setTitleColor(.black, for: .normal)
+        btn.backgroundColor = .viewBackground
+        btn.setTitleColor(.label, for: .normal)
         btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         btn.layer.cornerRadius = 5
         return btn
