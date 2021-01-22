@@ -37,6 +37,8 @@ class TodosListController: UIViewController {
         createItemLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 88, left: 16, bottom: 0, right: 0), size: .init(width: view.frame.width - 32, height: 50))
         
         fetchTodos()
+        
+        tableView.backgroundColor = .viewBackground
     }
     
     fileprivate func fetchTodos() {

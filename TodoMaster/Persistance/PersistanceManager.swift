@@ -43,7 +43,7 @@ final class PersistanceManager {
     }
     
     func markCompleted(todo: Todo, completion: @escaping (Result<Todo, Error>) -> () ) {
-        todo.completed = true
+        todo.completed.toggle()
         saveContext { (error) in
             if let error = error {
                 completion(.failure(error))

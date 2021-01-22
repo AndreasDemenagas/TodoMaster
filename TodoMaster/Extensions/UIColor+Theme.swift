@@ -14,6 +14,8 @@ extension UIColor {
     static let darkBlueBackground = UIColor.rgb(r: 9, g: 45, b: 64)
     static let lightBlueBackground = UIColor.rgb(r: 218, g: 235, b: 243)
     
+    static let viewBackground = UIColor.secondarySystemBackground
+    
     static func rgb(r: CGFloat, g: CGFloat, b: CGFloat) -> UIColor {
         return UIColor.init(red: r/255, green: g/255, blue: b/255, alpha: 1)
     }

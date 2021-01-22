@@ -44,20 +44,18 @@ class TodoListCell: UITableViewCell, ReusableView {
             setPriority(priority: todo?.priority)
             addedAtLabel.text = "Added: " + formatAddedDate(date: todo?.addedAt)
             
-            if todo!.completed {
-                completedTodo()
-            } else {
-                print("Todo with title \"\(todo!.title!)\" has not been completed....")
-            }
+            let completed = todo!.completed
+            
+            formatCell(completed: completed)
         }
     }
     
-    private func completedTodo() {
-        accessoryType = .checkmark
-        titleLabel.textColor = .lightGray
-        titleLabel.alpha = 0.5
-        priorityLabel.alpha = 0.5
-        addedAtLabel.alpha = 0.5
+    private func formatCell(completed: Bool) {
+        accessoryType = completed ? .checkmark : .none
+        titleLabel.textColor =  completed ? .lightGray : .label
+        titleLabel.alpha = completed ? 0.5 : 1
+        priorityLabel.alpha =  completed ? 0.5 : 1
+        addedAtLabel.alpha =  completed ? 0.5 : 1
     }
     
     private func setPriority(priority: String?) {
@@ -91,6 +89,16 @@ class TodoListCell: UITableViewCell, ReusableView {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        backgroundColor = .viewBackground
+        
+        setupCell()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    fileprivate func setupCell() {
         addSubview(addedAtLabel)
         addedAtLabel.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 12, left: 16, bottom: 0, right: 0))
         
@@ -102,10 +110,6 @@ class TodoListCell: UITableViewCell, ReusableView {
         
         addSubview(separator)
         separator.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, size: .init(width: .zero, height: 1))
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
 }
