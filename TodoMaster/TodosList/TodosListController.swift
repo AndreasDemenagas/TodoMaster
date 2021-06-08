@@ -51,6 +51,7 @@ class TodosListController: UIViewController {
         tableView = UITableView()
         view.addSubview(tableView)
         tableView.fillSuperView()
+        tableView.allowsSelection = false 
         tableView.separatorStyle = .none
         tableView.register(TodoListCell.self, forCellReuseIdentifier: TodoListCell.id)
         tableView.delegate = self
